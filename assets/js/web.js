@@ -1,29 +1,39 @@
-// const card = document.querySelector('.card');
 const contenedor = document.querySelector('#contenedorProductos');
 let articulos = [];
-
 
 cargarEventos();
 function cargarEventos(){
     document.addEventListener('DOMContentLoaded',()=>{
-        crearHTML();
+        obtenerDatos();
     });
 }
 
-function crearHTML(){
-    articulos = [...productos];
-    articulos.forEach(producto=>{
+function obtenerDatos(){
+    const url = 'https://bsale-test-u6r8.onrender.com/api/producto/';
+    fetch(url)
+        .then(respuesta => respuesta.json())
+        .then(resultado => crearHTML(resultado))
+        .catch(error => console.log(error))
+}
+
+function crearHTML(resultado){
+    
+    // console.log(typeof(resultado));
+    // let productos = JSON.parse(resultado);
+    resultado.forEach(producto =>{
+        const no_image = './assets/img/sin_imagen.jpg';
         const {id,name,url_image,price} = producto;
         const row = document.createElement('div');
-        row.classList.add('col');
+        row.classList.add('col','py-4');
+        // row.setAttribute('style','width=15rem');
         row.innerHTML = `
-        <div class="card" style="width: 15rem;">
-        <img src="${url_image}" class="card-img-top" alt="..."/>
+        <div class="card mx-auto h-100" style="width: 17rem;">
+        <img src="${[url_image?url_image:no_image]}" class="card-img-top float-center" alt="..."/>
         <div class="card-body">
         <h5 class="card-title text-center">${name}</h5>
         <div class="row" >
         <div class="col-8">
-        <p class="card-text">$ ${price}</p>
+        <p class="card-text">$ ${new Intl.NumberFormat('es-CL').format(price)}</p>
         </div>
         <div class="col-4">
         <a href="#" class="btn btn-outline-primary" data-id="${id}">
@@ -42,19 +52,20 @@ function crearHTML(){
 
 }
 
-// consumo api con javascript vanilla
-function consumoApi(){
-    const API = "";
-    let productos = null;
 
-    const getProductos = async () => {
-        const res = await fetch(API);
-        const data = await res.json();
-        productos = data.productos;
-    };
+  // 
 
-    window.addEventListener('load',function(){
-        getProductos();
-    });
 
-}
+// otro metodo comprobado
+// const API_URL = url;
+// const xhr = new XMLHttpRequest();
+
+// function manejador(){
+//     if(this.readyState === 4 && this.status === 200){
+//         console.log(this.response);
+//     }
+// }
+
+// xhr.addEventListener('load', manejador);
+// xhr.open("GET",`${API_URL}`);
+// xhr.send();
