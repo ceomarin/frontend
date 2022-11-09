@@ -42,6 +42,19 @@ function crearHTML(){
 
 }
 
+// consumo api con javascript vanilla
+function consumoApi(){
+    const API = "";
+    let productos = null;
 
+    const getProductos = async () => {
+        const res = await fetch(API);
+        const data = await res.json();
+        productos = data.productos;
+    };
 
-// {/* <div class="col"></div> */}
+    window.addEventListener('load',function(){
+        getProductos();
+    });
+
+}
