@@ -1,0 +1,26 @@
+const productos = [
+    {
+        "id":1,
+        "name":"cerveza",
+        "url_image":"./assets/img/cerveza.jpg",
+        "price":5000.0,
+        "discount":50,
+        "category":500
+    },
+    {
+        "id":2,
+        "name":"bebida",
+        "url_image":"./assets/img/bebida.jpg",
+        "price":7000.0,
+        "discount":50,
+        "category":600
+    },
+    {
+        "id":3,
+        "name":"snack",
+        "url_image":"./assets/img/snack.jpg",
+        "price":10500.0,
+        "discount":50,
+        "category":700
+    }
+]
